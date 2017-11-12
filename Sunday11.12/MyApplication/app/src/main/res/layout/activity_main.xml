@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.lenovo.myapplication.MainActivity">
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hello unique studio!"
+        android:textSize="42dp"/>
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="touch me" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="next activity"/>
+    <android.support.v4.widget.DrawerLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/drawerlayout"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        >
+
+        <FrameLayout
+            android:id="@+id/fl1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </FrameLayout>
+
+        <ListView
+            android:id="@+id/left"
+            android:layout_width="200dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="start"
+            android:choiceMode="singleChoice"
+            android:divider="@color/colorAccent"
+            android:dividerHeight="0dp">
+        </ListView>
+    </android.support.v4.widget.DrawerLayout>
+</LinearLayout>
