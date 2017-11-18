@@ -54,7 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     {
         Intent intent = new Intent(MainActivity.this,SecondActivity.class);
         Bundle bundle = new Bundle();
-        bundle.putInt("position",position);
+//        bundle.putInt("id",1);
+        bundle.putInt("id", (int) listView.getAdapter().getItemId(position));
         intent.putExtras(bundle);
         startActivity(intent);
     }
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         db = SQLiteDatabase.openOrCreateDatabase(this.getFilesDir().toString() +
                 "/notice.db3",null);
         db.execSQL("create table if not exists fourfiretable (" +
-                "id int(5) primary key autoincrement," +
+                "id integer primary key autoincrement," +
                 "detailtext text)");
     }
 }

@@ -60,10 +60,12 @@ public class myAdapter extends BaseAdapter
         }
         return view;
     }
+
     public void add()
     {
-        itemList.add(new Item(R.id.second_edit,id++));
+        itemList.add(new Item(R.id.second_edit,id));
         notifyDataSetChanged();
+        id++;
     }
 
     public void remove(int pos)

@@ -1,7 +1,10 @@
 package com.example.lenovo.fourfilesnotice;
 
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -10,9 +13,6 @@ public class SecondActivity extends AppCompatActivity
 {
     int id;
     EditText editText;
-    String text;
-    Bundle data;
-    Intent intentOut;
     Intent intentIn;
     SQLiteDatabase db;
     @Override
@@ -22,23 +22,32 @@ public class SecondActivity extends AppCompatActivity
         setContentView(R.layout.activity_second);
         onDatebase();
         intentIn = getIntent();
-        id = (int)intentIn.getIntExtra("position",0);
+        id = (int)intentIn.getIntExtra("id",-1);
         editText = (EditText)findViewById(R.id.second_edit);
-        text = editText.getText().toString();
-        data = new Bundle();
-        data.putSerializable("detail",text);
-        intentOut = new Intent(SecondActivity.this,MainActivity.class);
+        showText();
     }
     @Override
     protected void onDestroy()
     {
         super.onDestroy();
-        intentOut.putExtras(data);
+        db.execSQL("update fourfiretable set detailtext = '" + editText.getText().toString() + "' where id = " + (id + 1));
     }
     //创建或打开数据库
     public void onDatebase()
     {
         db = SQLiteDatabase.openOrCreateDatabase(this.getFilesDir().toString() +
                 "/notice.db3",null);
+    }
+
+    public void showText()
+    {
+            Cursor cursor = db.rawQuery("select detailtext from fourfiretable where id like " + (id + 1) + "",null);
+            if(cursor.moveToFirst() && cursor != null)
+            {
+                do{
+                    editText.setText(cursor.getString(cursor.getColumnIndex("detailtext")));
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
     }
 }
