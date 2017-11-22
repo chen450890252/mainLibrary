@@ -30,7 +30,12 @@ public class SecondActivity extends AppCompatActivity
     protected void onDestroy()
     {
         super.onDestroy();
-        db.execSQL("update fourfiretable set detailtext = '" + editText.getText().toString() + "' where id = " + (id + 1));
+        db.execSQL("update noticetable set detailtext = '" + editText.getText().toString() + "' where id = " + (id + 1));
+        String text = editText.getText().toString();
+        Bundle data = new Bundle();
+        data.putString("text",text);
+        intentIn.putExtra("text",data);
+        SecondActivity.this.setResult(2,intentIn);
     }
     //创建或打开数据库
     public void onDatebase()
@@ -41,7 +46,7 @@ public class SecondActivity extends AppCompatActivity
 
     public void showText()
     {
-            Cursor cursor = db.rawQuery("select detailtext from fourfiretable where id like " + (id + 1) + "",null);
+            Cursor cursor = db.rawQuery("select detailtext from noticetable where id like " + (id + 1) + "",null);
             if(cursor.moveToFirst() && cursor != null)
             {
                 do{
